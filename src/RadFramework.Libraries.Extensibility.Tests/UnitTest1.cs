@@ -33,7 +33,7 @@ namespace RadFramework.Extensibility.Tests
              
             serviceProviderMock.GetService(Arg.Is(typeof(AddB))).Returns(new AddB());
             
-            IPipeline<string, string> pipe = new AsyncPipeline<string, string>(concat4As, serviceProviderMock);
+            IPipeline<string, string> pipe = new IAsynchronousPipeline<string, string>(concat4As, serviceProviderMock);
             
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -45,7 +45,7 @@ namespace RadFramework.Extensibility.Tests
             Assert.True(result == "AAAABBBB");
         }
 
-        private class AddA : AsyncPipeBase<string, string>
+        private class AddA : AsynchronousPipeBase<string, string>
         {
             public override void Process(Func<string> input, Action<string> @continue, Action<object> @return)
             {
@@ -53,7 +53,7 @@ namespace RadFramework.Extensibility.Tests
             }
         }
 
-        private class AddB : AsyncPipeBase<string, string>
+        private class AddB : AsynchronousPipeBase<string, string>
         {
             public override void Process(Func<string> input, Action<string> @continue, Action<object> @return)
             {

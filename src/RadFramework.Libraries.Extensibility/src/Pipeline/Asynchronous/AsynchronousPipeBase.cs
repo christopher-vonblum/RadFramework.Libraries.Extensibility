@@ -2,7 +2,7 @@ using System;
 
 namespace RadFramework.Abstractions.Extensibility.Pipeline.Asynchronous
 {
-    public abstract class AsyncPipeBase<TIn, TOut> : IAsyncPipe
+    public abstract class AsynchronousPipeBase<TIn, TOut> : IAsynchronousPipe
     {
         public void Process(Func<object> input, Action<object> @continue, Action<object> @return)
         {

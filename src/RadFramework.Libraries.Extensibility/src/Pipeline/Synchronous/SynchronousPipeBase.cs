@@ -1,6 +1,6 @@
 namespace RadFramework.Abstractions.Extensibility.Pipeline.Synchronous
 {
-    public abstract class SyncPipeBase<TInput, TOutput> : ISyncPipe
+    public abstract class SynchronousPipeBase<TInput, TOutput> : ISynchronousPipe
     {
         public object Process(object input)
         {

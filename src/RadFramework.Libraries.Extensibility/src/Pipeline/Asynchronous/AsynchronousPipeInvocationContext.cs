@@ -2,18 +2,18 @@ using System.Threading;
 
 namespace RadFramework.Abstractions.Extensibility.Pipeline.Asynchronous
 {
-    public class PipeInvocationContext
+    public class AsynchronousPipeInvocationContext
     {
-        private readonly PipeInvocationContext _parent;
+        private readonly AsynchronousPipeInvocationContext _parent;
         public object Result { get; set; }
         public ManualResetEvent ValueReturned { get; } = new ManualResetEvent(false);
         public ManualResetEvent PipelineResultReturned { get; } = new ManualResetEvent(false);
-        public PipeInvocationContext()
+        public AsynchronousPipeInvocationContext()
         {
             PipelineResultReturned = new ManualResetEvent(false);
         }
 
-        public PipeInvocationContext(PipeInvocationContext parent)
+        public AsynchronousPipeInvocationContext(AsynchronousPipeInvocationContext parent)
         {
             _parent = parent;
             PipelineResultReturned = parent.PipelineResultReturned;

@@ -1,6 +1,6 @@
 namespace RadFramework.Abstractions.Extensibility.Pipeline.Synchronous
 {
-    public interface ISyncPipe
+    public interface ISynchronousPipe
     {
         object Process(object input);
     }

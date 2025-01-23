@@ -6,19 +6,19 @@ using RadFramework.Libraries.Extensibility.Pipeline;
 
 namespace RadFramework.Abstractions.Extensibility.Pipeline.Asynchronous
 {
-    public class AsyncPipeline<TIn, TOut> : IPipeline<TIn, TOut>
+    public class IAsynchronousPipeline<TIn, TOut> : IPipeline<TIn, TOut>
     {
         private readonly IServiceProvider _serviceProvider;
-        public LinkedList<IAsyncPipe> definitions;
+        public LinkedList<IAsynchronousPipe> definitions;
         
-        public AsyncPipeline(PipelineDefinition<TIn, TOut> definition, IServiceProvider serviceProvider)
+        public IAsynchronousPipeline(PipelineDefinition<TIn, TOut> definition, IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            definitions = new LinkedList<IAsyncPipe>(definition.Definitions.Select(CreatePipe));
+            definitions = new LinkedList<IAsynchronousPipe>(definition.Definitions.Select(CreatePipe));
         }
-        private IAsyncPipe CreatePipe(PipeDefinition def)
+        private IAsynchronousPipe CreatePipe(PipeDefinition def)
         {
-            return (IAsyncPipe) _serviceProvider.GetService(def.Type);
+            return (IAsynchronousPipe) _serviceProvider.GetService(def.Type);
         }
 
         public TOut Process(TIn input)
@@ -64,7 +64,7 @@ namespace RadFramework.Abstractions.Extensibility.Pipeline.Asynchronous
             pipelineContext.PreviousReturnedValue.Set();
         }
 
-        private void CreateThread(PipeContext previousContext, LinkedListNode<IAsyncPipe> current,
+        private void CreateThread(PipeContext previousContext, LinkedListNode<IAsynchronousPipe> current,
             PipeContext pipelineContext, List<PipeContext> contexts)
         {
             Thread pipeThread = new Thread(() =>
